@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { styled } from "styled-components";
 import background from "../images/bakground.svg";
 import logo from "../images/logo.svg";
@@ -6,6 +6,7 @@ import languege from "../data/languege.json";
 import CustomRadio from "../components/common/CustomRadio";
 import Input from "../components/common/Input";
 import useValues from "../hooks/useValues";
+import Button from "../components/common/Button";
 
 const Login = () => {
   const { values, onChangeValues, setValues } = useValues({
@@ -14,9 +15,6 @@ const Login = () => {
     LANGUAGE: "kr",
   });
 
-  useEffect(() => {
-    // console.log(values);
-  }, [values]);
   return (
     <LoginWrap>
       <div className="container">
@@ -29,12 +27,26 @@ const Login = () => {
             setValues={setValues}
           />
           <div className="loginBox">
-            <Input id={"KCC_ID"} values={values} onChange={onChangeValues} />
-            <Input
-              id={"KCC_PW"}
-              type="password"
-              values={values}
-              onChange={onChangeValues}
+            <div className="inputBox">
+              <Input
+                id={"KCC_ID"}
+                values={values}
+                onChange={onChangeValues}
+                placeholder={"ID"}
+              />
+              <Input
+                id={"KCC_PW"}
+                type="password"
+                values={values}
+                onChange={onChangeValues}
+                placeholder={"password"}
+              />
+            </div>
+
+            <Button
+              styleType={"primary"}
+              text={"Login"}
+              style={{ padding: "0 2rem" }}
             />
           </div>
         </LoginForm>
@@ -43,7 +55,20 @@ const Login = () => {
   );
 };
 
-const LoginForm = styled.form``;
+const LoginForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  .loginBox {
+    display: flex;
+    gap: 16px;
+    .inputBox {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+  }
+`;
 
 const LoginWrap = styled.div`
   background-image: url(${background});
