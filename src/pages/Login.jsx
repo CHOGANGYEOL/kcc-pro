@@ -26,6 +26,7 @@ const Login = () => {
             values={values}
             setValues={setValues}
           />
+
           <div className="loginBox">
             <div className="inputBox">
               <Input
