@@ -32,9 +32,12 @@ const GlobalStyled = createGlobalStyle`
         padding: 0;
         margin: 0;
         cursor: pointer;
+        background-color: transparent;
     }
     
-    
+    li {
+        list-style: none;
+    }
 `;
 
 export default GlobalStyled;

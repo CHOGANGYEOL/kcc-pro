@@ -9,7 +9,7 @@ import Button from "../components/common/Button";
 import CustomCheckbox from "../components/common/CustomCheckbox";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { isLogin } from "../redux/actions/isLogin";
+import { loginAction } from "../redux/actions/isLogin";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -30,7 +30,7 @@ const Login = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (values.KCC_ID === TEST_ID.ID && values.KCC_PW === TEST_ID.PW) {
-      dispatch(isLogin(true));
+      dispatch(loginAction(true));
       navigate("/main");
     } else {
       toast.error("로그인에 실패하였습니다.");
