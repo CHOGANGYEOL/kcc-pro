@@ -1,4 +1,3 @@
-import React from "react";
 import { styled } from "styled-components";
 import background from "../images/bakground.svg";
 import logo from "../images/logo.svg";
@@ -7,19 +6,42 @@ import CustomRadio from "../components/common/CustomRadio";
 import Input from "../components/common/Input";
 import useValues from "../hooks/useValues";
 import Button from "../components/common/Button";
+import CustomCheckbox from "../components/common/CustomCheckbox";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { isLogin } from "../redux/actions/isLogin";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { values, onChangeValues, setValues } = useValues({
     KCC_ID: "",
     KCC_PW: "",
     LANGUAGE: "kr",
+    isIDSave: [],
   });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const TEST_ID = {
+    ID: "test1",
+    PW: "1234",
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (values.KCC_ID === TEST_ID.ID && values.KCC_PW === TEST_ID.PW) {
+      dispatch(isLogin(true));
+      navigate("/main");
+    } else {
+      toast.error("로그인에 실패하였습니다.");
+    }
+  };
 
   return (
     <LoginWrap>
       <div className="container">
         <img src={logo} alt="logo" />
-        <LoginForm>
+        <LoginForm onSubmit={onSubmit}>
           <CustomRadio
             data={languege}
             id={"LANGUAGE"}
@@ -45,11 +67,24 @@ const Login = () => {
             </div>
 
             <Button
+              type={"submit"}
               styleType={"primary"}
               text={"Login"}
               style={{ padding: "0 2rem" }}
             />
           </div>
+          <CustomCheckbox
+            data={[
+              {
+                idx: 1,
+                value: "Remember-me",
+                label: "Remember-me",
+              },
+            ]}
+            id={"isIDSave"}
+            values={values}
+            setValues={setValues}
+          />
         </LoginForm>
       </div>
     </LoginWrap>

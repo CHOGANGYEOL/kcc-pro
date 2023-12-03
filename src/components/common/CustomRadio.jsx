@@ -9,7 +9,7 @@ const CustomRadio = (props) => {
         const isChecked = el.value === values[id];
         return (
           <RadioEl
-            key={"checkbox_" + el.idx}
+            key={"radio_" + el.idx}
             htmlFor={el.value}
             checked={isChecked}
           >
